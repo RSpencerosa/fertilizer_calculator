@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://2rixi4n8cinu"]
+
+[node name="main" type="Node2D"]
+
+[node name="split" type="HSplitContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="left" type="GridContainer" parent="split"]
+layout_mode = 2
+
+[node name="right" type="GridContainer" parent="split"]
+layout_mode = 2
+
+[node name="notes" type="TextEdit" parent="split/right"]
+layout_mode = 2
+
+[node name="history" type="RichTextLabel" parent="split/right"]
+layout_mode = 2
