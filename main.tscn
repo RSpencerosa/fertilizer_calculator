@@ -1,19 +1,141 @@
-[gd_scene format=3 uid="uid://2rixi4n8cinu"]
+[gd_scene load_steps=2 format=3 uid="uid://2rixi4n8cinu"]
+
+[ext_resource type="Script" uid="uid://dfo3k5dd2tn6v" path="res://scripts/main.gd" id="1_h2yge"]
 
 [node name="main" type="Node2D"]
+script = ExtResource("1_h2yge")
 
-[node name="split" type="HSplitContainer" parent="."]
+[node name="split" type="GridContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="left" type="GridContainer" parent="split"]
 layout_mode = 2
 
+[node name="input" type="GridContainer" parent="split/left"]
+layout_mode = 2
+columns = 3
+
+[node name="number" type="SpinBox" parent="split/left/input"]
+layout_mode = 2
+allow_greater = true
+
+[node name="unitIn" type="OptionButton" parent="split/left/input"]
+layout_mode = 2
+selected = 1
+item_count = 4
+popup/item_0/text = "oz"
+popup/item_0/id = 3
+popup/item_1/text = "lb"
+popup/item_1/id = 0
+popup/item_2/text = "g"
+popup/item_2/id = 1
+popup/item_3/text = "kg"
+popup/item_3/id = 2
+
+[node name="material" type="OptionButton" parent="split/left/input"]
+layout_mode = 2
+tooltip_text = "20-0-0"
+selected = 1
+item_count = 22
+popup/item_0/text = "Inorganic"
+popup/item_0/id = 3
+popup/item_0/disabled = true
+popup/item_0/separator = true
+popup/item_1/text = "Ammonium sulfate"
+popup/item_1/id = 0
+popup/item_2/text = "Ammonium nitrate"
+popup/item_2/id = 1
+popup/item_3/text = "Diammonium phosphate"
+popup/item_3/id = 2
+popup/item_4/text = "Sodium nitrate"
+popup/item_4/id = 4
+popup/item_5/text = "Potassium nitrate"
+popup/item_5/id = 5
+popup/item_6/text = "Superphosphate"
+popup/item_6/id = 6
+popup/item_7/text = "Triple Superphosphate"
+popup/item_7/id = 7
+popup/item_8/text = "Dicalcium phosphate"
+popup/item_8/id = 8
+popup/item_9/text = "Diammonium phosphate"
+popup/item_9/id = 9
+popup/item_10/text = "Monoammonium phosphate"
+popup/item_10/id = 10
+popup/item_11/text = "Potassium chloride"
+popup/item_11/id = 11
+popup/item_12/text = "Potassium nitrate"
+popup/item_12/id = 12
+popup/item_13/text = "Organic"
+popup/item_13/id = 13
+popup/item_13/disabled = true
+popup/item_13/separator = true
+popup/item_14/text = "Bat guano"
+popup/item_14/id = 14
+popup/item_15/text = "Blood meal"
+popup/item_15/id = 15
+popup/item_16/text = "Cow manure"
+popup/item_16/id = 16
+popup/item_17/text = "Compost"
+popup/item_17/id = 17
+popup/item_18/text = "Fish meal"
+popup/item_18/id = 18
+popup/item_19/text = "Poultry litter"
+popup/item_19/id = 19
+popup/item_20/text = "Seaweed"
+popup/item_20/id = 20
+popup/item_21/text = "Wood ashes"
+popup/item_21/id = 21
+
+[node name="nutrient" type="OptionButton" parent="split/left/input"]
+layout_mode = 2
+selected = 0
+item_count = 5
+popup/item_0/text = "Nitrogen"
+popup/item_0/id = 0
+popup/item_1/text = "Phosphorous (PO3)"
+popup/item_1/id = 1
+popup/item_2/text = "Potassium (KOH)"
+popup/item_2/id = 2
+popup/item_3/text = "Phosphorous (actual)"
+popup/item_3/id = 3
+popup/item_4/text = "Potassium (actual)"
+popup/item_4/id = 4
+
+[node name="unitOut" type="OptionButton" parent="split/left/input"]
+layout_mode = 2
+selected = 1
+item_count = 4
+popup/item_0/text = "oz"
+popup/item_0/id = 3
+popup/item_1/text = "lb"
+popup/item_1/id = 0
+popup/item_2/text = "g"
+popup/item_2/id = 1
+popup/item_3/text = "kg"
+popup/item_3/id = 2
+
+[node name="switch" type="Button" parent="split/left/input"]
+layout_mode = 2
+text = "Mode: Material to Nutrient"
+
+[node name="calculate" type="Button" parent="split/left"]
+layout_mode = 2
+text = "Calculate"
+
+[node name="result" type="Label" parent="split/left"]
+layout_mode = 2
+
 [node name="right" type="GridContainer" parent="split"]
+layout_mode = 2
+
+[node name="history" type="Label" parent="split/right"]
 layout_mode = 2
 
 [node name="notes" type="TextEdit" parent="split/right"]
 layout_mode = 2
+placeholder_text = "Write your notes here"
 
-[node name="history" type="RichTextLabel" parent="split/right"]
-layout_mode = 2
+[connection signal="item_selected" from="split/left/input/material" to="." method="_on_material_item_selected"]
+[connection signal="button_up" from="split/left/input/switch" to="." method="_on_switch_button_up"]
+[connection signal="button_up" from="split/left/calculate" to="." method="_on_calculate_button_up"]
