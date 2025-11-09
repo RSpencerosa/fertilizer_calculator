@@ -7,6 +7,12 @@ var unit = 1
 var part = 1
 var result
 
+func _ready():
+	$split/left/input/unitIn.get_popup().add_theme_font_size_override("font_size",30)
+	$split/left/input/material.get_popup().add_theme_font_size_override("font_size",30)
+	$split/left/input/nutrient.get_popup().add_theme_font_size_override("font_size",30)
+	$split/left/input/unitOut.get_popup().add_theme_font_size_override("font_size",30)
+
 func _on_custom_button_up():
 	$split/left/custom.visible = false
 	$split/left/npk.visible = true
@@ -45,7 +51,7 @@ func _on_calculate_button_up():
 		$split/left/result.text = str(result) + " " + str($split/left/input/unitOut.text) + " " + \
 			str($split/left/input/material.text) + " for " + str(int($split/left/input/number.value)) + " " + \
 			str($split/left/input/unitIn.text) + " " + str($split/left/input/nutrient.text)
-	$split/right/history.text = $split/left/result.text + "\n" + $split/right/history.text
+	$split/left/history.text = $split/left/result.text + "\n" + $split/left/history.text
 
 func _on_switch_button_up():
 	if $split/left/input/switch.text == "Mode: Material to Nutrient":

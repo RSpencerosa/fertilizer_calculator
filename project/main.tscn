@@ -1,17 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://2rixi4n8cinu"]
+[gd_scene load_steps=3 format=3 uid="uid://2rixi4n8cinu"]
 
 [ext_resource type="Script" uid="uid://dfo3k5dd2tn6v" path="res://scripts/main.gd" id="1_h2yge"]
+[ext_resource type="Texture2D" uid="uid://clxeenvgyshv3" path="res://assets/marigold.png" id="2_0xm2m"]
 
 [node name="main" type="Node2D"]
 script = ExtResource("1_h2yge")
 
-[node name="split" type="GridContainer" parent="."]
-offset_right = 1028.0
-offset_bottom = 303.0
-columns = 2
+[node name="split" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 100.0
+offset_top = 50.0
+offset_right = 1128.0
+offset_bottom = 847.0
 
 [node name="left" type="GridContainer" parent="split"]
+layout_mode = 0
+offset_right = 1028.0
+offset_bottom = 797.0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="split/left"]
 layout_mode = 2
+theme_override_font_sizes/normal_font_size = 50
+bbcode_enabled = true
+text = "[rainbow freq=0.2 sat=0.2 val=0.8]Fertilizer Calculator[/rainbow]"
+fit_content = true
+horizontal_alignment = 1
 
 [node name="custom" type="Button" parent="split/left"]
 layout_mode = 2
@@ -158,30 +172,44 @@ popup/item_3/id = 2
 [node name="switch" type="Button" parent="split/left/input"]
 layout_mode = 2
 text = "Mode: Material to Nutrient"
+alignment = 0
 
 [node name="calculate" type="Button" parent="split/left"]
 layout_mode = 2
 text = "Calculate"
 
 [node name="result" type="Button" parent="split/left"]
-custom_minimum_size = Vector2(0, 31)
+custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 focus_mode = 0
 disabled = true
+text_overrun_behavior = 3
 
-[node name="right" type="GridContainer" parent="split"]
+[node name="notes" type="TextEdit" parent="split/left"]
+custom_minimum_size = Vector2(508, 150)
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
+placeholder_text = "Click the custom material button to add to the dropdown
+Click the mode button to switch modes
+You can write any notes here!"
 
-[node name="history" type="RichTextLabel" parent="split/right"]
-custom_minimum_size = Vector2(508, 62)
+[node name="history" type="RichTextLabel" parent="split/left"]
+custom_minimum_size = Vector2(860, 300)
 layout_mode = 2
 size_flags_vertical = 3
+theme_override_font_sizes/normal_font_size = 20
+horizontal_alignment = 1
 
-[node name="notes" type="TextEdit" parent="split/right"]
-custom_minimum_size = Vector2(508, 62)
-layout_mode = 2
-size_flags_vertical = 3
-placeholder_text = "Write your notes here"
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(246, 63)
+scale = Vector2(2, 2)
+texture = ExtResource("2_0xm2m")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(818, 63)
+scale = Vector2(2, 2)
+texture = ExtResource("2_0xm2m")
+flip_h = true
 
 [connection signal="button_up" from="split/left/custom" to="." method="_on_custom_button_up"]
 [connection signal="button_up" from="split/left/confirm" to="." method="_on_confirm_button_up"]

@@ -22,3 +22,4 @@ theme/custom="uid://bpkali5vhl2dk"
 
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+environment/defaults/default_clear_color=Color(0.10237465, 0.04451193, 0.0096966615, 1)
