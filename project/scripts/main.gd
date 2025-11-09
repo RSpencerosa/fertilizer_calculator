@@ -7,8 +7,17 @@ var unit = 1
 var part = 1
 var result
 
-func _ready():
-	pass
+func _on_custom_button_up():
+	$split/left/custom.visible = false
+	$split/left/npk.visible = true
+	$split/left/confirm.visible = true
+
+func _on_confirm_button_up():
+	$split/left/custom.visible = true
+	$split/left/npk.visible = false
+	$split/left/confirm.visible = false
+	$split/left/input/material.add_item(str(int($split/left/npk/n.value)) + "-" + \
+		str(int($split/left/npk/p.value)) + "-" + str(int($split/left/npk/k.value)))
 
 func _on_calculate_button_up():
 	if !$split/left/input/nutrient.text.contains("actual"):
@@ -25,14 +34,18 @@ func _on_calculate_button_up():
 			_nutrient($split/left/input/number.value,nutrient,unit)
 		else: _nutrientActual($split/left/input/number.value,nutrient,unit,part)
 		result = snapped(result,0.01)
-		$split/left/result.text = str(result) + " " + str($split/left/input/unitOut.text) + " " + str($split/left/input/nutrient.text)
+		$split/left/result.text = str(result) + " " + str($split/left/input/unitOut.text) + " " + \
+			str($split/left/input/nutrient.text) + " in " + str(int($split/left/input/number.value)) + " " + \
+			str($split/left/input/unitIn.text) + " " + str($split/left/input/material.text)
 	else: 
 		if !$split/left/input/nutrient.text.contains("actual"):
 			_material($split/left/input/number.value,nutrient,unit)
 		else: _materialActual($split/left/input/number.value,nutrient,unit,part)
 		result = snapped(result,0.01)
-		$split/left/result.text = str(result) + " " + str($split/left/input/unitOut.text) + " " + str($split/left/input/material.text)
-	$split/right/history.text += $split/left/result.text + "\n"
+		$split/left/result.text = str(result) + " " + str($split/left/input/unitOut.text) + " " + \
+			str($split/left/input/material.text) + " for " + str(int($split/left/input/number.value)) + " " + \
+			str($split/left/input/unitIn.text) + " " + str($split/left/input/nutrient.text)
+	$split/right/history.text = $split/left/result.text + "\n" + $split/right/history.text
 
 func _on_switch_button_up():
 	if $split/left/input/switch.text == "Mode: Material to Nutrient":
@@ -130,5 +143,7 @@ func _on_material_item_selected(index):
 		"Wood ashes":
 			NPK = [0,0.9,5.6]
 		_:
-			NPK = [0,0,0]
+			var string = $split/left/input/material.get_item_text(index)
+			var split = string.split_floats("-")
+			NPK = split
 	$split/left/input/material.tooltip_text = str(NPK[0]) + "-" + str(NPK[1]) + "-" + str(NPK[2])

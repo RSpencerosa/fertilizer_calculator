@@ -6,11 +6,48 @@
 script = ExtResource("1_h2yge")
 
 [node name="split" type="GridContainer" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
+offset_right = 1028.0
+offset_bottom = 303.0
+columns = 2
 
 [node name="left" type="GridContainer" parent="split"]
 layout_mode = 2
+
+[node name="custom" type="Button" parent="split/left"]
+layout_mode = 2
+text = "Add Custom Material"
+
+[node name="npk" type="GridContainer" parent="split/left"]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 6
+
+[node name="n" type="SpinBox" parent="split/left/npk"]
+layout_mode = 2
+
+[node name="1" type="Label" parent="split/left/npk"]
+layout_mode = 2
+text = " N - "
+
+[node name="p" type="SpinBox" parent="split/left/npk"]
+layout_mode = 2
+
+[node name="2" type="Label" parent="split/left/npk"]
+layout_mode = 2
+text = " P - "
+
+[node name="k" type="SpinBox" parent="split/left/npk"]
+layout_mode = 2
+
+[node name="3" type="Label" parent="split/left/npk"]
+layout_mode = 2
+text = " K "
+
+[node name="confirm" type="Button" parent="split/left"]
+visible = false
+layout_mode = 2
+text = "Confirm"
 
 [node name="input" type="GridContainer" parent="split/left"]
 layout_mode = 2
@@ -37,7 +74,7 @@ popup/item_3/id = 2
 layout_mode = 2
 tooltip_text = "20-0-0"
 selected = 1
-item_count = 22
+item_count = 23
 popup/item_0/text = "Inorganic"
 popup/item_0/id = 3
 popup/item_0/disabled = true
@@ -86,6 +123,9 @@ popup/item_20/text = "Seaweed"
 popup/item_20/id = 20
 popup/item_21/text = "Wood ashes"
 popup/item_21/id = 21
+popup/item_22/text = "Custom"
+popup/item_22/id = 22
+popup/item_22/separator = true
 
 [node name="nutrient" type="OptionButton" parent="split/left/input"]
 layout_mode = 2
@@ -123,19 +163,28 @@ text = "Mode: Material to Nutrient"
 layout_mode = 2
 text = "Calculate"
 
-[node name="result" type="Label" parent="split/left"]
+[node name="result" type="Button" parent="split/left"]
+custom_minimum_size = Vector2(0, 31)
 layout_mode = 2
+focus_mode = 0
+disabled = true
 
 [node name="right" type="GridContainer" parent="split"]
 layout_mode = 2
 
-[node name="history" type="Label" parent="split/right"]
+[node name="history" type="RichTextLabel" parent="split/right"]
+custom_minimum_size = Vector2(508, 62)
 layout_mode = 2
+size_flags_vertical = 3
 
 [node name="notes" type="TextEdit" parent="split/right"]
+custom_minimum_size = Vector2(508, 62)
 layout_mode = 2
+size_flags_vertical = 3
 placeholder_text = "Write your notes here"
 
+[connection signal="button_up" from="split/left/custom" to="." method="_on_custom_button_up"]
+[connection signal="button_up" from="split/left/confirm" to="." method="_on_confirm_button_up"]
 [connection signal="item_selected" from="split/left/input/material" to="." method="_on_material_item_selected"]
 [connection signal="button_up" from="split/left/input/switch" to="." method="_on_switch_button_up"]
 [connection signal="button_up" from="split/left/calculate" to="." method="_on_calculate_button_up"]
