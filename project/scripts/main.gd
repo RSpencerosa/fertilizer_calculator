@@ -8,6 +8,8 @@ var part = 1
 var result
 
 func _ready():
+	$split/left/input/number.get_line_edit().virtual_keyboard_enabled = true
+	$split/left/input/number.get_line_edit().virtual_keyboard_show_on_focus = true
 	$split/left/input/unitIn.get_popup().add_theme_font_size_override("font_size",30)
 	$split/left/input/material.get_popup().add_theme_font_size_override("font_size",30)
 	$split/left/input/nutrient.get_popup().add_theme_font_size_override("font_size",30)

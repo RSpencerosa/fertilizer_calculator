@@ -212,6 +212,10 @@ scale = Vector2(2, 2)
 texture = ExtResource("2_0xm2m")
 flip_h = true
 
+[node name="LineEdit" type="LineEdit" parent="."]
+offset_right = 120.0
+offset_bottom = 50.0
+
 [connection signal="button_up" from="split/left/custom" to="." method="_on_custom_button_up"]
 [connection signal="button_up" from="split/left/confirm" to="." method="_on_confirm_button_up"]
 [connection signal="item_selected" from="split/left/input/material" to="." method="_on_material_item_selected"]
